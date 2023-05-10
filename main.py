@@ -37,35 +37,48 @@ def check_win():
     elif computer_sum > 21:
         return True
 
-
-for i in range(2):
-    user_cards.append(random_card())
-    computer_cards.append(random_card())
-
-user_sum = sum_cards(user_cards)
-computer_sum = sum_cards(computer_cards)
-print(f"Your cards is: {user_cards}, current score: {user_sum}")
-print(f"Computer`s first card: {computer_cards[0]}")
-user_choice = input("Type 'y' to get another card, type 'n' to pass: ")
-if user_choice == "y":
-    user_cards.append(random_card())
-    user_sum = sum_cards(user_cards)
-    print(f"You took one more card {user_cards}, current score: {user_sum}")
-    if computer_sum < 17:
+def start():
+    global user_sum, computer_sum
+    user_cards = []
+    computer_cards = []
+    for i in range(2):
+        user_cards.append(random_card())
         computer_cards.append(random_card())
-        print(f"Computer took one more card {computer_cards}")
-    computer_sum = sum_cards(computer_cards)
-elif user_choice == "n":
-    pass
 
-result = check_win()
-if result is True:
-    print(f"User win {user_sum}, computer score : {computer_sum}")
-elif result == "Draw":
-    print(result)
-elif result == "User Win - BlackJack":
-    print(result)
-elif result == "Computer win - BlackJack":
-    print(result)
-else:
-    print(f"Computer win {computer_sum}, user score {user_sum}")
+    user_sum = sum_cards(user_cards)
+    computer_sum = sum_cards(computer_cards)
+    print(f"Your cards is: {user_cards}, current score: {user_sum}")
+    print(f"Computer`s first card: {computer_cards[0]}")
+    user_choice = input("Type 'y' to get another card, type 'n' to pass: ")
+    if user_choice == "y":
+        user_cards.append(random_card())
+        user_sum = sum_cards(user_cards)
+        print(f"You took one more card {user_cards}, current score: {user_sum}")
+        if computer_sum < 17:
+            computer_cards.append(random_card())
+            print(f"Computer took one more card {computer_cards}")
+        computer_sum = sum_cards(computer_cards)
+    elif user_choice == "n":
+        pass
+
+    result = check_win()
+    if result is True:
+        print(f"User win {user_sum}, computer score : {computer_sum}")
+    elif result == "Draw":
+        print(result)
+    elif result == "User Win - BlackJack":
+        print(result)
+    elif result == "Computer win - BlackJack":
+        print(result)
+    else:
+        print(f"Computer win {computer_sum}, user score {user_sum}")
+    question = input("You want to restart the game? y/n:")
+    if question == "y":
+        return start()
+    elif question=="n":
+        exit()
+def main():
+    start()
+
+if __name__ == '__main__':
+    main()
