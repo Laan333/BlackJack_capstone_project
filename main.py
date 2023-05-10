@@ -16,7 +16,6 @@ def sum_cards(card_list: list) -> int:
     if len(card_list) <= 2 and summ_cards == 21:
         return 0
     if summ_cards > 21:
-        print(1)
         cards[0] = 1
     return summ_cards
 
